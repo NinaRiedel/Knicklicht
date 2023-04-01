@@ -29,7 +29,7 @@
 </head>
 
 <body>
-    <div id="rahmen" draggable="true">
+    <div id="rahmen">
         <svg width="500px" height="500px" viewBox="0 0 700 700" id="glowstick" style=" ;">
 
             <g>
@@ -48,13 +48,16 @@
     </p>
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.12/lib/draggable.bundle.js"></script>
 
 <script type="text/javascript">
     console.log("Ich wusste, dass du hier nachguckst.")
     const div = document.getElementById("rahmen")
     const svg = document.getElementById("glowstick");
     const path = svg.getElementsByTagName("path")[0]
-    const Ansage = document.getElementById("Ansage")
+    const container = new Draggable.Draggable(document.getElementById("rahmen"), {
+      draggable: 'svg'
+    });
     let drags = 0;
     let clicked = false
 
@@ -74,27 +77,27 @@
 
             })
 
-            div.addEventListener("dragend", () => {
-                console.log("drag");
-                drags++;
-                if (drags === 1) {
-                    path.style = "fill:rgba(29, 250, 85, 0.753)"
-                    Ansage.textContent = "noch mehr schütteln..."
-                    Ansage.style = ""
-                }
-                if (drags === 2) {
-                    path.style = "fill:rgb(63, 250, 63);filter: drop-shadow(0px 0px 40px white)"
-                    Ansage.style = ""
-                    Ansage.textContent = "Und jetzt viel Spaß!"
-                    setTimeout(() => {
-                        Ansage.style = "color: transparent"
-                    }, 3000);
-                }
-                svg.style = ""
+            // div.addEventListener("dragend", () => {
+            //     console.log("drag");
+            //     drags++;
+            //     if (drags === 1) {
+            //         path.style = "fill:rgba(29, 250, 85, 0.753)"
+            //         Ansage.textContent = "noch mehr schütteln..."
+            //         Ansage.style = ""
+            //     }
+            //     if (drags === 2) {
+            //         path.style = "fill:rgb(63, 250, 63);filter: drop-shadow(0px 0px 40px white)"
+            //         Ansage.style = ""
+            //         Ansage.textContent = "Und jetzt viel Spaß!"
+            //         setTimeout(() => {
+            //             Ansage.style = "color: transparent"
+            //         }, 3000);
+            //     }
+            //     svg.style = ""
                 
 
 
-            })
+            // })
         }
         clicked = true;
 
