@@ -1,0 +1,106 @@
+<html>
+
+<head>
+    <title>
+        Knicklicht
+    </title>
+    <style>
+        html {
+            font-size: 18px;
+        }
+
+        body {
+            background: rgb(24, 24, 24);
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        #Ansage {
+            color: grey;
+            font-size: 36px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="rahmen" draggable="true">
+        <svg width="500px" height="500px" viewBox="0 0 700 700" id="glowstick" style=" ;">
+
+            <g>
+                <path style="fill:none;filter: drop-shadow(3px 5px 20px rgb(255, 255, 255))"
+                    d="M 461.435 112.22 L 109.08 466.143 C 108.993 466.274 117.946 495.223 121.637 489.686 L 141.256 511.659 L 164.013 521.861 L 521.861 163.229 L 504.597 137.332 L 481.838 120.067 L 461.435 112.22 Z" />
+
+                <path style="fill: rgb(127, 133, 127);"
+                    d="m590.35 98.055c16.184-16.184 16.184-42.504 0-58.633-16.184-16.184-42.504-16.184-58.684 0-8.793 8.7344-12.824 20.551-12.039 32.031-12.152-6.8867-23.129-8.9609-28.223-3.8633l-391.05 391.05c-8.1211 8.1133 2.0703 31.359 20.945 50.281 18.93 18.93 42.223 29.121 50.344 21l391.05-391.1c5.1523-5.0977 2.9102-16.352-4.2617-28.727 11.484 0.72656 23.191-3.3047 31.926-12.043zm-78.344 75.656-344.62 344.62c-5.4336 5.375-21.84-2.1289-37.574-17.859-15.734-15.793-23.297-32.199-17.863-37.574l344.62-344.62c5.375-5.4336 21.785 2.1289 37.52 17.863 15.734 15.73 23.293 32.141 17.918 37.57zm33.152-89.152c-8.7344-8.7344-8.7344-22.902 0-31.695 8.7422-8.7344 22.965-8.7344 31.695 0 8.7422 8.793 8.7422 22.961 0 31.695-8.7344 8.7383-22.961 8.7383-31.695 0z" />
+
+            </g>
+        </svg>
+    </div>
+
+    <p id="Ansage"> Klicken zum Knicken!
+
+    </p>
+
+</body>
+
+<script type="text/javascript">
+    console.log("Ich wusste, dass du hier nachguckst.")
+    const div = document.getElementById("rahmen")
+    const svg = document.getElementById("glowstick");
+    const path = svg.getElementsByTagName("path")[0]
+    const Ansage = document.getElementById("Ansage")
+    let drags = 0;
+    let clicked = false
+
+    svg.addEventListener("click", () => {
+
+        if (clicked === false) {
+            console.log(path);
+            Ansage.textContent = "Jetzt schütteln!"
+            path.style = "fill: rgba(14, 143, 36, 0.363)"
+
+            div.addEventListener("drag", () => {
+                console.log("drag");
+                svg.style = "display:none"
+                Ansage.style = "display:none"
+
+
+
+            })
+
+            div.addEventListener("dragend", () => {
+                console.log("drag");
+                drags++;
+                if (drags === 1) {
+                    path.style = "fill:rgba(29, 250, 85, 0.753)"
+                    Ansage.textContent = "noch mehr schütteln..."
+                    Ansage.style = ""
+                }
+                if (drags === 2) {
+                    path.style = "fill:rgb(63, 250, 63);filter: drop-shadow(0px 0px 40px white)"
+                    Ansage.style = ""
+                    Ansage.textContent = "Und jetzt viel Spaß!"
+                    setTimeout(() => {
+                        Ansage.style = "color: transparent"
+                    }, 3000);
+                }
+                svg.style = ""
+                
+
+
+            })
+        }
+        clicked = true;
+
+    })
+
+
+</script>
+
+</html>
